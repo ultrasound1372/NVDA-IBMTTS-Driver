@@ -359,8 +359,8 @@ def terminate():
 	player.close()
 	callbackQueue= callbackThread= dll= eciQueue=eciThread= handle= idleTimer= onDoneSpeaking= onIndexReached= player = None
 
-def set_voice(vl):
-		user32.PostThreadMessageA(eciThreadId, WM_PARAM, int(vl), ECIParam.eciLanguageDialect)
+def setVoice(vl):
+		user32.PostThreadMessageA(eciThreadId, WM_PARAM, vl, ECIParam.eciLanguageDialect)
 
 def getVParam(pr):
 	return vparams[pr]

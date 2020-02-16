@@ -133,6 +133,7 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 		self.rate=50
 		self.speakingLanguage=lang
 		self.variant="1"
+		self.currentEncoding = "mbcs"
 
 	PROSODY_ATTRS = {
 		speech.PitchCommand: ECIVoiceParam.eciPitchBaseline,
@@ -160,6 +161,7 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 					if item.lang != self.speakingLanguage and item.lang != self.speakingLanguage[0:2]:
 						outlist.append((_ibmeci.speak, (l,)))
 						self.speakingLanguage=item.lang
+						self.updateEncoding(l)
 				else:
 					outlist.append((_ibmeci.speak, (langsAnnotations[defaultLanguage],)))
 					self.speakingLanguage = defaultLanguage
@@ -193,12 +195,12 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 			text = text.replace('quil', 'qil') #Sometimes this string make everything buggy with IBMTTS in French
 		if self._backquoteVoiceTags:
 			#this converts to ansi for anticrash. If this breaks with foreign langs, we can remove it.
-			text = text.encode('mbcs', 'replace')
+			text = text.replace('`', ' ').encode(self.currentEncoding, 'replace') #no embedded commands
 			text = b"`pp0 `vv%d %s" % (_ibmeci.getVParam(ECIVoiceParam.eciVolume), text)
 			text = resub(anticrash_res, text)
 		else:
 			#this converts to ansi for anticrash. If this breaks with foreign langs, we can remove it.
-			text = text.encode('mbcs', 'replace')
+			text = text.encode(self.currentEncoding, 'replace')
 			text = resub(anticrash_res, text)
 			text = b"`pp0 `vv%d %s" % (_ibmeci.getVParam(ECIVoiceParam.eciVolume), text.replace(b'`', b' ')) #no embedded commands
 		text = pause_re.sub(br'\1 `p0\2\3', text)
@@ -297,7 +299,19 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 	def _get_voice(self):
 		return str(_ibmeci.params[_ibmeci.ECIParam.eciLanguageDialect])
 	def _set_voice(self,vl):
-		_ibmeci.set_voice(vl)
+		_ibmeci.setVoice(int(vl))
+		self.updateEncoding(int(vl))
+
+	def updateEncoding(self, lang): # lang must be a number asociated with IBMTTS languages or a string with an annotation language.
+		# currently we don't need to consider the decimal part for the conversion.
+		if isinstance(lang, bytes): lang = int(float(lang[2:])) * 65536
+		#chinese
+		if lang == 393216: self.currentEncoding = "gb2312"
+		# japan
+		elif lang == 524288: self.currentEncoding = "cp932"
+		# korean
+		elif lang == 655360: self.currentEncoding = "cp949"
+		else: self.currentEncoding = "mbcs"
 
 	def _get_lastIndex(self):
 		#fix?
