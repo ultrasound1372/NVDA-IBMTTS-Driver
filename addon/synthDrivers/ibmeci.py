@@ -226,7 +226,7 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 
 	def processText(self,text):
 		text = text.rstrip()
-		if _ibmeci.params[9] in (65536, 65537, 393216, 655360): text = resub(english_fixes, text)
+		if _ibmeci.params[9] in (65536, 65537, 393216, 655360): text = resub(english_fixes, text) #Applies to Chinese and Korean as they can read English text and thus inherit the English bugs.
 		if _ibmeci.params[9] in (131072,  131073): text = resub(spanish_fixes, text)
 		if _ibmeci.params[9] in (196609, 196608):
 			text = resub(french_fixes, text)
