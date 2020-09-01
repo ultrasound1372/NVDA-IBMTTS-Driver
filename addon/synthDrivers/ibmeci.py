@@ -37,7 +37,7 @@ english_fixes = {
 	re.compile(r'([a-zA-Z0-9_]+)@(\w+)'): r'\1 at \2',
 	#	Does not occur in normal use, however if a dictionary entry contains the Mc prefix, and NVDA splits it up, the synth will crash.
 	#	Also fixes ViaVoice, as the parser is more strict there and doesn't like spaces in Mc names.
-	re.compile(r"\b(Mc) {1,}([A-Z][a-z]+)"): r"\1\2",
+		re.compile(r"\b(Mc)\s+([A-Z][a-z]+)"): r"\1\2",
 # Crash words, formerly part of anticrash_res.
 	re.compile(r'\b(.*?)c(ae|\xe6)sur(e)?', re.I): r'\1seizur',
 	re.compile(r"\b(|\d+|\W+)h'(r|v)[e]", re.I): r"\1h \2e",
