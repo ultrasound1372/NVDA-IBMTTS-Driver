@@ -42,7 +42,7 @@ english_fixes = {
 	re.compile(r'\b(.*?)c(ae|\xe6)sur(e)?', re.I): r'\1seizur',
 	re.compile(r"\b(|\d+|\W+)h'(r|v)[e]", re.I): r"\1h \2e",
 	re.compile(r"\b(\w+[bdfhjlmnqrvz])(h[he]s)([abcdefghjklmnopqrstvwy]\w+)\b", re.I): r"\1 \2\3",
-	re.compile(r"\b(\w+[bdfhjlmnqrvz])(h[he]s)(iron+)\b", re.I): r"\1 \2\3",
+	re.compile(r"\b(\w+[bdfhjlmnqrvz])(h[he]s)(iron+[degins]?)", re.I): r"\1 \2\3",
 	re.compile(r"(\d):(\d\d[snrt][tdh])", re.I): r"\1 \2",
 	re.compile(r"\b([bcdfghjklmnpqrstvwxz]+)'([bcdefghjklmnprstvwxz']+)'([drtv][aeiou]?)", re.I): r"\1 \2 \3",
 	re.compile(r"\b(you+)'(re)+'([drv]e?)", re.I): r"\1 \2 \3",
