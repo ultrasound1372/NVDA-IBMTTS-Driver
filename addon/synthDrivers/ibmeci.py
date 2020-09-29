@@ -39,7 +39,7 @@ english_fixes = {
 	#	Also fixes ViaVoice, as the parser is more strict there and doesn't like spaces in Mc names.
 		re.compile(r"\b(Mc)\s+([A-Z][a-z]+)"): r"\1\2",
 # Fixes a weird issue with the date parser. Without this fix, strings like "03 Marble" will be pronounced as "march threerd ble".
-		re.compile(r"\b(\d+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Oct|Nov|Dec)([a-z]+)"): r"\1  \2\3",
+		re.compile(r"\b(\d+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)([a-z]+)"): r"\1  \2\3",
 # Don't break UK formatted dates.
 		re.compile(r"\b(\d+)  (January|February|March|April|May|June|July|August|September|October|November|December)"): r"\1 \2",
 # Crash words, formerly part of anticrash_res.
