@@ -41,7 +41,7 @@ english_fixes = {
 	# Don't break UK formatted dates.
 	re.compile(r"\b(\d+)  (January|February|March|April|May|June|July|August|September|October|November|December)\b"): r"\1 \2",
 	# Crash words, formerly part of anticrash_res.
-	re.compile(r'\b(.*?)c(ae|\xe6)sur(e)?', re.I): r'\1seizur',
+	re.compile(r'\b(.*?)c(ae|\xe6)s[uū]r(e)?', re.I): r'\1seizur',
 	re.compile(r"\b(|\d+|\W+)h'(r|v)[e]", re.I): r"\1h \2e",
 	re.compile(r"\b(\w+[bdfhjlmnqrvz])(h[he]s)([abcdefghjklmnopqrstvwy]\w+)\b", re.I): r"\1 \2\3",
 	re.compile(r"\b(\w+[bdfhjlmnqrvz])(h[he]s)(iron+[degins]?)", re.I): r"\1 \2\3",
