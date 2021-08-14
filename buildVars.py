@@ -23,7 +23,7 @@ addon_info = {
 	# Author(s)
 	"addon_author" : u"David CM <dhf360@gmail.com>, x0 and others",
 	# URL for the add-on documentation support
-	"addon_url" : "https://github.com/davidacm/NVDA-IBMTTS-Driver",
+	"addon_url" : "https://github.com/ultrasound1372/NVDA-IBMTTS-Driver",
 	# Documentation file name
 	"addon_docFileName" : "readme.html",
 	# Minimum NVDA version supported (e.g. "2018.3.0")
